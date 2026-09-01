@@ -1,12 +1,4 @@
-// ---------------------------------------------------------------------------
-// Central content for the portfolio.
-//
-// This file is the single place to update text, links and project data.
-// Components read from here rather than hardcoding copy, so the site can
-// be extended (new project, new skill, new nav item) without touching JSX.
-//
-// Replace every "REPLACE_ME" style placeholder below before deploying.
-// ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 export const personal = {
   name: 'Sai Kukkapalli',
@@ -128,7 +120,7 @@ export const projects = [
       'Automated rollback',
       'Security-first pipeline design',
     ],
-    // REPLACE_ME: point these at the real repository once it's public.
+  
     liveUrl: '',
     githubUrl: 'https://github.com/Saichowdary9/devsecops-cicd-platform',
   },
@@ -240,14 +232,13 @@ export const github = {
 export const resume = {
   headline: 'Interested in working together?',
   text: "I'm actively looking for opportunities where I can contribute, learn and grow as a DevOps or Cloud Engineer.",
-  // REPLACE_ME: drop the real PDF into public/resume/ using this filename,
-  // or override the path with VITE_RESUME_URL in your .env file.
+
   fileUrl: import.meta.env.VITE_RESUME_URL || '/resume/Sai-Kukkapalli-Resume.pdf',
 };
 
 // -- Contact -------------------------------------------------------------------
 export const contact = {
-  // REPLACE_ME: swap these for your real details before deploying.
+
   email: 'saikukkapalli9@gmail.com',
   linkedin: 'https://www.linkedin.com/in/kukkapalli-sai-chowdary-devops/',
   githubUrl: 'https://github.com/Saichowdary9',
