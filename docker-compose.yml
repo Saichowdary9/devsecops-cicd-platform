@@ -1,0 +1,7 @@
+services:
+  portfolio:
+    build: . 
+    container_name: devops-portfolio
+    ports:
+      - "8081:80"
+    restart: unless-stopped
