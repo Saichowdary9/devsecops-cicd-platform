@@ -8,6 +8,12 @@ pipeline {
                 checkout scm
             }
         }
+        
+        stage('Trivy Filesystem Scan') {
+            steps {
+                sh 'trivy fs . --include-dev-deps --exit-code 1 --severity HIGH,CRITICAL'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
