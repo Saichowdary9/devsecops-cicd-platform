@@ -20,6 +20,11 @@ pipeline {
                 sh 'docker compose build'
             }
         }
+      stage('Trivy Docker Image Scan') {
+          steps {
+              sh 'trivy image --exit-code 1 --severity HIGH,CRITICAL sai-kukkapalli-devops-portfolio-portfolio:latest'
+          }
+      }
 
         stage('Deploy Application') {
             steps {
