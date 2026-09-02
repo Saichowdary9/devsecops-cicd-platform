@@ -34,7 +34,7 @@ pipeline {
      stage('Push Image to ECR') {
          steps {
              sh '''
-                aws ecr get-login-pssword --region eu-north-1 | \
+                aws ecr get-login-password --region eu-north-1 | \
                 docker login --username  AWS --password-stdin \
                 008482604258.dkr.ecr.eu-north-1.amazonaws.com
                  
