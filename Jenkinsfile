@@ -31,6 +31,21 @@ pipeline {
                 sh 'docker compose up -d'
             }
         }
+     stage('Push Image to ECR') {
+         steps {
+             sh '''
+                aws ecr get-login-pssword --region eu-north-1 | \
+                docker login --username  AWS --password-stdin \
+                008482604258.dkr.ecr.eu-north-1.amazonaws.com
+                 
+                docker tag \
+                sai-kukkapalli-devops-portfolio-portfolio:latest \
+                008482604258.dkr.ecr.eu-north-1.amazonaws.com/sai-kukkapalli-devops-portfolio:latest
+                docker push \
+                008482604258.dkr.ecr.eu-north-1.amazonaws.com/sai-kukkapalli-devops-portfolio:latest
+                '''
+          }
+     }
 
         stage('Verify Deployment') {
             steps {
