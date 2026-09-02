@@ -53,15 +53,34 @@ pipeline {
             }
         }
 
-        stage('Deploy Application') {
+        stage('Deploy to EKS') {
             steps {
-                sh 'docker compose up -d'
+                sh '''
+                    aws eks update-kubeconfig \
+                      --name sai-devops-eks \
+                      --region eu-north-1
+
+                    kubectl set image deployment/portfolio \
+                      portfolio=008482604258.dkr.ecr.eu-north-1.amazonaws.com/sai-kukkapalli-devops-portfolio:${BUILD_NUMBER} \
+                      --namespace default
+                '''
             }
         }
 
-        stage('Verify Deployment') {
+        stage('Verify EKS Deployment') {
             steps {
-                sh 'docker compose ps'
+                sh '''
+                    kubectl rollout status deployment/portfolio \
+                      --namespace default \
+                      --timeout=180s
+
+                    kubectl get pods \
+                      --namespace default \
+                      -l app=portfolio
+
+                    kubectl get deployment portfolio \
+                      --namespace default
+                '''
             }
         }
     }
