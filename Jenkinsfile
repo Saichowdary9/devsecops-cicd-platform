@@ -1,4 +1,4 @@
-pipeline {
+          pipeline {
     agent any
 
     stages {
@@ -63,6 +63,7 @@ pipeline {
                     kubectl apply -f k8s/portfolio-deployment.yml
                     kubectl apply -f k8s/portfolio-service.yml
                     kubectl apply -f k8s/portfolio-ingress.yml
+                    kubectl apply -f k8s/portfolio-network-policy.yml
 
                     kubectl set image deployment/portfolio \
                       portfolio=008482604258.dkr.ecr.eu-north-1.amazonaws.com/sai-kukkapalli-devops-portfolio:${BUILD_NUMBER} \
@@ -89,6 +90,9 @@ pipeline {
                       --namespace default
 
                     kubectl get ingress portfolio-ingress \
+                      --namespace default
+
+                    kubectl get networkpolicy portfolio-network-policy \
                       --namespace default
                 '''
             }
