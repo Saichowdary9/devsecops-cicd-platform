@@ -6,17 +6,17 @@ metadata:
     app: portfolio
 spec:
   replicas: 2
-
   selector:
     matchLabels:
       app: portfolio
-
   template:
     metadata:
       labels:
         app: portfolio
-
     spec:
+      serviceAccountName: portfolio-sa
+      automountServiceAccountToken: false
+
       securityContext:
         runAsUser: 101
         runAsGroup: 101
@@ -27,10 +27,8 @@ spec:
       containers:
         - name: portfolio
           image: 008482604258.dkr.ecr.eu-north-1.amazonaws.com/sai-kukkapalli-devops-portfolio:9
-
           ports:
             - containerPort: 8080
-
           securityContext:
             runAsUser: 101
             runAsGroup: 101
@@ -39,7 +37,6 @@ spec:
             capabilities:
               drop:
                 - ALL
-
           resources:
             requests:
               cpu: "100m"
