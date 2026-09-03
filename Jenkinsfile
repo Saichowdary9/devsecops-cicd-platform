@@ -60,6 +60,10 @@ pipeline {
                       --name sai-devops-eks \
                       --region eu-north-1
 
+                    kubectl apply -f k8s/portfolio-deployment.yml
+                    kubectl apply -f k8s/portfolio-service.yml
+                    kubectl apply -f k8s/portfolio-ingress.yml
+
                     kubectl set image deployment/portfolio \
                       portfolio=008482604258.dkr.ecr.eu-north-1.amazonaws.com/sai-kukkapalli-devops-portfolio:${BUILD_NUMBER} \
                       --namespace default
@@ -79,6 +83,12 @@ pipeline {
                       -l app=portfolio
 
                     kubectl get deployment portfolio \
+                      --namespace default
+
+                    kubectl get service portfolio-service \
+                      --namespace default
+
+                    kubectl get ingress portfolio-ingress \
                       --namespace default
                 '''
             }
