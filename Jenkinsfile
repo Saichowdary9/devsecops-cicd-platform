@@ -59,7 +59,7 @@
                     aws eks update-kubeconfig \
                       --name sai-devops-eks \
                       --region eu-north-1
-
+                    kubectl apply -f k8s/portfolio-serviceaccount.yml
                     kubectl apply -f k8s/portfolio-deployment.yml
                     kubectl apply -f k8s/portfolio-service.yml
                     kubectl apply -f k8s/portfolio-ingress.yml
